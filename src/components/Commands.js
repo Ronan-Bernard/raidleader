@@ -4,7 +4,7 @@ class Commands extends Component {
 
   render() {
     return(
-      <ul class="commands">
+      <ul className="commands">
         <li>Pause</li>
         <li>Se plaindre</li>
         <li>Focus</li>
