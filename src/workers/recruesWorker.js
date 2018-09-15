@@ -1,22 +1,17 @@
+import Recrue from '../models/Recrue'
+
 // worker.js
 const workercode = () => {
 
   let errors = false;
-  let compteurRecrues = 0;
 
   // LOAD appSettings.json
 
   function generateRecrue() {
-    compteurRecrues++;
-
-    // calculer ses infos
-
-      // générer un nom
-
-      // générer des stats
+    var recrue = new Recrue();
 
       // poster au thread principal
-      self.postMessage({ message: 'info recrues ' + compteurRecrues});
+      self.postMessage({ recrueInfos: JSON.stringify(recrue)});
     if (!errors) {
       setTimeout(generateRecrue, 30000)
     }
