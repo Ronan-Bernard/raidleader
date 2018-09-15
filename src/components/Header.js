@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import Recrutement from './Recrutement';
-import recrueworker_script from '../workers/recruesWorker';
+import recrueWorker from 'worker!../workers/recruesWorker.js';  // eslint-disable-line import/no-webpack-loader-syntax
 
 class Header extends Component {
 
@@ -11,13 +11,13 @@ class Header extends Component {
     }
   }
   componentWillMount() {
-    this.recruesWorker = new Worker(recrueworker_script);
+    this.recruesWorker = new recrueWorker('../workers/recruesWorker.js');
   }
 
   render() {
     this.recruesWorker.onmessage = (m) => {
       this.setState({data: m.data})
-      console.log(m.data.message);
+      console.log(m.data.infos);
     }
 
     return(
