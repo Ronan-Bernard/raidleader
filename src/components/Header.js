@@ -16,8 +16,7 @@ class Header extends Component {
 
   render() {
     this.recruesWorker.onmessage = (m) => {
-      this.setState({data: m.data})
-      console.log(m.data.infos);
+      this.setState({recrues: this.state.recrues.push(m.data.infosRecrue)});
     }
 
     return(
