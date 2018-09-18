@@ -20,7 +20,7 @@ class Header extends Component {
       let newListRecrues = _.concat(nouvelleRecrue, this.state.recrues);
       console.log(newListRecrues);
 
-      if (newListRecrues.length > 3) {
+      if (newListRecrues.length > 4) {
         newListRecrues.pop();
       }
       this.setState({recrues: newListRecrues});

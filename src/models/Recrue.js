@@ -25,7 +25,7 @@ class Recrue {
     ];
     let nomRandom = '';
     for (let i=0; i < (this.rnd(3) + 1); i++) {
-      let newSyllabe = syllabes[this.rnd(syllabes.length) - 1];
+      let newSyllabe = syllabes[this.rnd(syllabes.length - 1)];
       nomRandom += newSyllabe;
     }
     return nomRandom;
