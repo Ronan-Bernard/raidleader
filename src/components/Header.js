@@ -1,9 +1,9 @@
 import React, {Component} from "react";
 import Recrutement from './Recrutement';
 import recrueWorker from 'worker!../workers/recruesWorker.js';  // eslint-disable-line import/no-webpack-loader-syntax
+let _ = require('lodash');
 
 class Header extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -17,14 +17,13 @@ class Header extends Component {
   render() {
     this.recruesWorker.onmessage = (m) => {
       let nouvelleRecrue = [m.data.infosRecrue];
-      // let nouveauRecrues = new Array(this.state.recrues, nouvelleRecrue);
-      // le problème : créer 1 seul tableau en copiant this.state.recrues (une collection js ça existe ?), pr l'instant j'ai un sous-tableau
-      // console.log(nouveauRecrues);
+      let newListRecrues = _.concat(nouvelleRecrue, this.state.recrues);
+      console.log(newListRecrues);
 
-      /* if (newRecrues.length > 8) {
-        newRecrues.pop();
-      } */
-      this.setState({recrues: nouveauRecrues});
+      if (newListRecrues.length > 3) {
+        newListRecrues.pop();
+      }
+      this.setState({recrues: newListRecrues});
     }
 
     return(

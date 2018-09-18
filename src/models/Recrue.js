@@ -1,6 +1,7 @@
 class Recrue {
-  constructor() {
+  constructor(props) {
     if (!this.name) {
+      this.id = props;
       this.generateInfos();
     }
   }
@@ -16,7 +17,18 @@ class Recrue {
   }
 
   generateName() {
-    return "randomPinpin";
+    let syllabes = [
+      'bar','col','de','fa','guy','h','ha','jo','k','kal','lem','la','lim',
+      'ma','mo','mau','ni',
+      'pim','per','qua','ren','ro','sad','super','tu',
+      'va','vé','wal','xa','zo','zé'
+    ];
+    let nomRandom = '';
+    for (let i=0; i < (this.rnd(3) + 1); i++) {
+      let newSyllabe = syllabes[this.rnd(syllabes.length) - 1];
+      nomRandom += newSyllabe;
+    }
+    return nomRandom;
   }
 
   rnd(max) {
