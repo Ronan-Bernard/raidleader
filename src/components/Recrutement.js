@@ -1,12 +1,19 @@
 import React, {Component} from "react";
 
 class Recrutement extends Component {
+
+
   render() {
+    /* const recruesList = this.props.recrues.map((recrue) =>
+      <li>recrue</li>
+    ); */
+    // console.log(this.props.recrues);
+
     return(
       <div className="recrutement">
         <h3>Recrutement (4/5 diagrammes barre)</h3>
         <ul>
-          <li>Recrue 1</li>
+          {this.recruesList}
         </ul>
       </div>
     );

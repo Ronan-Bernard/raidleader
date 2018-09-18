@@ -16,7 +16,15 @@ class Header extends Component {
 
   render() {
     this.recruesWorker.onmessage = (m) => {
-      this.setState({recrues: this.state.recrues.push(m.data.infosRecrue)});
+      let nouvelleRecrue = [m.data.infosRecrue];
+      // let nouveauRecrues = new Array(this.state.recrues, nouvelleRecrue);
+      // le problème : créer 1 seul tableau en copiant this.state.recrues (une collection js ça existe ?), pr l'instant j'ai un sous-tableau
+      // console.log(nouveauRecrues);
+
+      /* if (newRecrues.length > 8) {
+        newRecrues.pop();
+      } */
+      this.setState({recrues: nouveauRecrues});
     }
 
     return(

@@ -4,7 +4,7 @@ import Recrue from '../models/Recrue'
     let errors = false;
     let recrue = new Recrue();
 
-    postMessage({ infosRecrue: JSON.stringify(recrue)});
+    postMessage({ infosRecrue: recrue});
     if (!errors) {
       setTimeout(generateRecrue, 30000)
     }
