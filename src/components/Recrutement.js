@@ -10,7 +10,10 @@ class Recrutement extends Component {
         <ul className="stats">
           <li className="skill"><i className="ra ra-sword"></i>{recrue.skill}</li>
           <li className="focus"><i className="ra ra-aware"></i>{recrue.focus}</li>
-          <li className="cheerfulness"><i className="ra ra-hearts"></i>{recrue.cheerfulness}</li>
+          <li className="cheerfulness">
+            <i className="ra ra-hearts"></i>
+            <div className="value" height={recrue.cheerfulness * 10}></div>
+            </li>
         </ul>
       </li>
     );
