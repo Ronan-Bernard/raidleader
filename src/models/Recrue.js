@@ -9,19 +9,23 @@ class Recrue {
   generateInfos() {
     this.name = this.generateName();
     this.skill = this.rnd(5);
-    this.potentialSkill = this.rnd(5);
     this.focus = this.rnd(5); // suit les ordres
-    this.purity = this.rnd(5); // low = toxic
     this.cheerfulness = this.rnd(5); // bonne humeur, résiste aux échecs
+    this.fame = this.rnd(6) - 3; // neg = toxic
+      // volubilité ?
+      // inventaire de départ
     this.sex = (this.rnd(5) === 5) ? 'f': 'm';
+    this.potentialSkill = this.rnd(5); // caché
+    // this.heroClass : magie, heal, tank, sword, bow, offheal, offtank
   }
 
   generateName() {
     let syllabes = [
-      'bar','col','de','fa','guy','h','ha','jo','k','kal','lem','la','lim',
+      'ana','bar','col','de','fa','god','guy','h','ha',
+      'ji','jo','k','kal','lem','la','lim',
       'ma','mo','mau','ni',
-      'pim','per','qua','ren','ro','sad','super','tu',
-      'va','vé','wal','xa','zo','zé'
+      'pan','pim','per','qua','ren','ro','sad','Super','tu','Uber',
+      'va','vé','wal','X','xa','yo','yang','zo','zé'
     ];
     let nomRandom = '';
     for (let i=0; i < (this.rnd(3) + 1); i++) {

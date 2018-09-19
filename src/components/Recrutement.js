@@ -2,12 +2,18 @@ import React, {Component} from "react";
 
 class Recrutement extends Component {
 
-
   render() {
     const recruesList = this.props.recrues.map((recrue) =>
-      <li key={recrue.id}>{recrue.name}</li>
+      <li key={recrue.id}>
+        <div className="pp"></div>
+        <div className="name">{recrue.name}</div>
+        <ul className="stats">
+          <li className="skill"><i className="ra ra-sword"></i>{recrue.skill}</li>
+          <li className="focus"><i className="ra ra-aware"></i>{recrue.focus}</li>
+          <li className="cheerfulness"><i className="ra ra-hearts"></i>{recrue.cheerfulness}</li>
+        </ul>
+      </li>
     );
-    // console.log(this.props.recrues);
 
     return(
       <div className="recrutement">
