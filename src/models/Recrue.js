@@ -8,6 +8,7 @@ class Recrue {
 
   generateInfos() {
     this.name = this.generateName();
+    this.heroClass = this.generateHeroClass();
     this.skill = this.rnd(5);
     this.focus = this.rnd(5); // suit les ordres
     this.hearts = this.rnd(5); // bonne humeur, résiste aux échecs
@@ -16,7 +17,6 @@ class Recrue {
       // inventaire de départ
     this.sex = (this.rnd(5) === 5) ? 'f': 'm';
     this.potentialSkill = this.rnd(5); // caché
-    // this.heroClass : magie, heal, tank, sword, bow, offheal, offtank
   }
 
   generateName() {
@@ -33,6 +33,15 @@ class Recrue {
       nomRandom += newSyllabe;
     }
     return nomRandom;
+  }
+
+  generateHeroClass() {
+    let allClasses = [
+      'symetrist', 'cleric', 'tank', 'swordsman'
+    ];
+    // bow, offheal, offtank
+    // je pense que ça évoluera au fil du temps, pour forcer les joueurs à pick de nouvelles recrues ou à restuff
+    return allClasses[this.rnd(3)];
   }
 
   rnd(max) {

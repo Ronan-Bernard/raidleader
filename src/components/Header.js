@@ -12,9 +12,6 @@ class Header extends Component {
   }
   componentWillMount() {
     this.recruesWorker = new recrueWorker('../workers/recruesWorker.js');
-  }
-
-  render() {
     this.recruesWorker.onmessage = (m) => {
       let nouvelleRecrue = [m.data.infosRecrue];
       let newListRecrues = _.concat(nouvelleRecrue, this.state.recrues);
@@ -25,7 +22,9 @@ class Header extends Component {
       }
       this.setState({recrues: newListRecrues});
     }
+  }
 
+  render() {
     return(
       <header>
         <div className="chat">
