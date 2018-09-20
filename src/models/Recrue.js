@@ -10,7 +10,7 @@ class Recrue {
     this.name = this.generateName();
     this.skill = this.rnd(5);
     this.focus = this.rnd(5); // suit les ordres
-    this.cheerfulness = this.rnd(5); // bonne humeur, résiste aux échecs
+    this.hearts = this.rnd(5); // bonne humeur, résiste aux échecs
     this.fame = this.rnd(6) - 3; // neg = toxic
       // volubilité ?
       // inventaire de départ
@@ -21,7 +21,7 @@ class Recrue {
 
   generateName() {
     let syllabes = [
-      'ana','bar','col','de','fa','god','guy','h','ha',
+      'ana','bar','col','de','fa','god','guy','h','ha','i',
       'ji','jo','k','kal','lem','la','lim',
       'ma','mo','mau','ni',
       'pan','pim','per','qua','ren','ro','sad','Super','tu','Uber',

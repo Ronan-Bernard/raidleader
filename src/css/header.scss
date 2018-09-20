@@ -37,13 +37,34 @@ header {
   .stats {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     list-style-type: none;
+    height: 40px;
+    align-items: flex-end;
     li {
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-start;
+      margin: 0 2px 1px;
+    }
+    .valueWrapper {
+      height: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
     }
     .value {
+      width: 20px;
+      background-color: purple;
     }
   }
+
+}
+
+// renaming for rpg-awesome
+.ra-skill:before {
+  content: "";
+}
+.ra-focus:before {
+  content: "";
 }
