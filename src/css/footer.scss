@@ -1,0 +1,10 @@
+.commands {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style-type: none;
+  justify-content: space-evenly;
+  li {
+    min-width: 250px;
+  }
+}

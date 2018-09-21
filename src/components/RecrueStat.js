@@ -8,7 +8,14 @@ class RecrueStat extends Component {
       type: props.type
     }
   }
-// !!!!! pas sur que la stat évolue avec le props puisque ça passe par le constructeur, il faut un willUpdate ?
+
+  componentDidUpdate(props) {
+    this.state = {
+      stat: props.stat,
+      type: props.type
+    };
+  }
+
   render() {
     return (
       <li className={this.state.type}>

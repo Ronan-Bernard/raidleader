@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Commands from './components/Commands';
 import Header from './components/Header';
+import Raid from './components/Raid';
 import './App.css';
 
 class App extends Component {
@@ -8,9 +9,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <nav>
-          Le raid (2 / 4 groupes)
-        </nav>
+        <Raid />
         <main>
           L'affichage du combat / préparation du raid
         </main>

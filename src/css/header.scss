@@ -24,8 +24,8 @@ header {
     list-style-type: none;
     flex-wrap: wrap;
     > li {
-      width: 96px;
-      height: 102px;
+      width: $recrue-width;
+      height: $recrue-height;
       box-sizing: border-box;
       margin: 1px;
       border: 1px solid yellow;
@@ -33,6 +33,13 @@ header {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      cursor: pointer;
+      background-color: #fff;
+      transition: transform 0.5s ease;
+      transform-origin: top;
+      &:hover {
+        transform: scale(2);
+      }
     }
     .name {
       font-family: grobold;

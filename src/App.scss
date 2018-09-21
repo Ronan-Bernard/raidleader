@@ -1,7 +1,10 @@
 $ra-font-path: '../node_modules/rpg-awesome/fonts' !default;
 @import "../node_modules/rpg-awesome/scss/rpg-awesome";
+@import "css/settings.css";
 @import "css/fonts.scss";
 @import "css/header.css";
+@import "css/main.css";
+@import "css/footer.css";
 
 .App {
   text-align: center;
