@@ -40,8 +40,11 @@ header {
       background-color: #fff;
       transition: transform 0.5s ease;
       transform-origin: top;
+      position: relative;
+      z-index: 1;
       &:hover {
         transform: scale(2);
+        z-index: 10;
       }
     }
     .name {
