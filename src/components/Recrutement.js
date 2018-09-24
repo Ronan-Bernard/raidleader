@@ -22,7 +22,7 @@ class Recrutement extends Component {
           <div className="pp"></div>
           <div className="name">{recrue.name}</div>
           <ul className="stats">
-            <RecrueStat stat={recrue.skill} type="skill" />
+            <RecrueStat stat={recrue.skill} type={recrue.heroClass} />
             <RecrueStat stat={recrue.focus} type="focus" />
             <RecrueStat stat={recrue.hearts} type="hearts"/>
           </ul>

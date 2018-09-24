@@ -66,6 +66,10 @@ header {
       align-items: flex-start;
       margin: 0 2px 1px;
     }
+    i {
+      width: 100%;
+      font-size: 19px;
+    }
     .valueWrapper {
       height: 24px;
       margin-top: 1px;
@@ -82,9 +86,22 @@ header {
 }
 
 // renaming for rpg-awesome
-.ra-skill:before {
-  content: "";
-}
 .ra-focus:before {
   content: "";
 }
+.ra-swordsman:before {
+  content: "";
+}
+.ra-tank:before { //ra-shield
+  content: "";
+  color: gray;
+}
+.ra-cleric:before { // ra-health
+  content: "";
+  color: blue;
+}
+.ra-symetrist:before { // ra-crystal-wand
+  content: "";
+  color: red;
+}
+

@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import Recrutement from './Recrutement';
+import Chat from './Chat';
 import recrueWorker from 'worker!../workers/recruesWorker.js';  // eslint-disable-line import/no-webpack-loader-syntax
 let _ = require('lodash');
 
@@ -27,9 +28,7 @@ class Header extends Component {
   render() {
     return(
       <header>
-        <div className="chat">
-          Chat de guilde (classement des guildes, patches, choix des raids selon difficulté/popularité)
-        </div>
+        <Chat />
         <Recrutement recrues={this.state.recrues} />
       </header>
     );
