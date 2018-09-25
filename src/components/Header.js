@@ -16,7 +16,6 @@ class Header extends Component {
     this.recruesWorker.onmessage = (m) => {
       let nouvelleRecrue = [m.data.infosRecrue];
       let newListRecrues = _.concat(nouvelleRecrue, this.state.recrues);
-      console.log(newListRecrues);
 
       if (newListRecrues.length > 4) {
         newListRecrues.pop();

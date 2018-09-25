@@ -2,5 +2,21 @@ $recrue-width: 96px;
 $recrue-height: 102px;
 
 nav {
-  width: $recrue-width * 2;
+  width: 208px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin: 2px 3px;
+  ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style-type: none;
+    box-sizing: border-box;
+    width: 46%;
+    height: 46%;
+    margin: 2%;
+    padding: 3px;
+    background: #eee;
+  }
 }
