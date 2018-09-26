@@ -4,7 +4,10 @@ import RaidGroup from './RaidGroup';
 class Raid extends Component {
   constructor(props) {
     super(props);
-    this.group1 = {};
+    this.group1 = [];
+    this.group2 = [];
+    this.group3 = [];
+    this.group4 = [];
     // retrieve players from save
   }
 

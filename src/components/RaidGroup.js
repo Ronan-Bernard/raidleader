@@ -4,11 +4,18 @@ let _ = require('lodash');
 class RaidGroup extends Component {
   constructor(props) {
     super(props);
-    let numberOfEmptySlots = (this.props.players) ? 5 - this.props.players.length : 5;
+    let numberOfEmptySlots = (this.props.players.length > 0) ? 5 - this.props.players.length : 5;
+    let emptySlots = [];
+
+    for (let i = 1; i <= numberOfEmptySlots; i++) {
+      emptySlots.push({
+        id: i
+      });
+    }
 
     this.state = {
       players: [],
-      emptySlots: numberOfEmptySlots
+      emptySlots: emptySlots
     };
     _.concat(this.props.players, this.state.players);
   }
@@ -25,18 +32,18 @@ class RaidGroup extends Component {
     document.getElementById(e.target.id).classList.remove('drag-over');
   }
 
-  // contient toujours 5 lignes, meme s'il y a 0 player dans ce groupe
-
   render() {
     const playersList = this.state.players.map((player) =>
-      <li key={player.id}>
+      <li key={player.id} id={'player' + player.id} empty="false">
         X
       </li>
     );
 
-    // TODO liste pas ok, y a pas de key
-    // TODO remplacer le 5 par le state, mais il était pas initialisé
-    const emptyList = _.fill(new Array(5), <li>&nbsp;</li>);
+    const emptyList = this.state.emptySlots.map((emptyPlayer) =>
+      <li key={emptyPlayer.id} id={'player' + emptyPlayer.id} empty="true">
+        &nbsp;
+      </li>
+    );
 
     return (
       <ul onDragOver={this.dragOverRaidGroup} onDragLeave={this.dragLeaveRaidGroup} id={'group' + this.props.group}>

@@ -19,4 +19,16 @@ nav {
     padding: 3px;
     background: #eee;
   }
+  li {
+    flex: 1;
+    margin-bottom: 1px;
+    display: block;
+    width: 100%;
+  }
+  li.hovered {
+    border: 1px dashed gray;
+  }
+  li:last-of-type {
+    margin-bottom: 0;
+  }
 }
