@@ -21,12 +21,13 @@ class RaidGroup extends Component {
   }
 
   componentWillUpdate() {
-
+    // TODO refaire les opérations présentes dans le constructeur, pour gérer les changements dans la liste de players et ajuster avec des players vides
   }
 
   dragOverRaidGroup(e) {
     document.getElementById(e.target.id).classList.add('drag-over');
   }
+  // FIXME utiliser un drag et checker la position à chaque mouvement ? le over et le enter ne détectent pas assez bien l'élément réceptacle, trop petit
 
   dragLeaveRaidGroup(e) {
     document.getElementById(e.target.id).classList.remove('drag-over');
@@ -34,17 +35,21 @@ class RaidGroup extends Component {
 
   render() {
     const playersList = this.state.players.map((player) =>
-      <li key={player.id} id={'player' + player.id} empty="false">
-        X
+      <li key={player.id}
+          id={'player' + player.id}
+          empty="false">
+        <i class={"ra ra-" + player.heroClass} />
       </li>
     );
 
     const emptyList = this.state.emptySlots.map((emptyPlayer) =>
-      <li key={emptyPlayer.id} id={'player' + emptyPlayer.id} empty="true">
+      <li key={emptyPlayer.id}
+          id={'player' + emptyPlayer.id}
+          empty="true">
         &nbsp;
       </li>
     );
-
+// TODO emptyPlayer devrait etre un Player dont un champ rend empty à true.... Une seule liste !
     return (
       <ul onDragOver={this.dragOverRaidGroup} onDragLeave={this.dragLeaveRaidGroup} id={'group' + this.props.group}>
         {playersList}

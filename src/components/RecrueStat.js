@@ -19,7 +19,7 @@ class RecrueStat extends Component {
   render() {
     return (
       <li className={this.state.type}>
-        <i className={"ra ra-" + this.state.type}></i>
+        <i className={"ra ra-" + this.state.type} />
         <div className="valueWrapper">
           <div className="value" style={{height: this.state.stat * 5 + 'px' }}></div>
         </div>

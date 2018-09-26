@@ -7,9 +7,13 @@ class Recrutement extends Component {
     document.onselectstart = this.selectStart;
   }
 
-  drag(e) {
+  dragRecrueStart(e) {
     e.dataTransfer.setData("text/plain", e.target.id);
-    console.log(e.target.id);
+    e.target.classList.add('dragging');
+  }
+
+  dragRecrueEnd(e) {
+    e.target.classList.remove('dragging');
   }
 
   selectStart(e) {
@@ -18,7 +22,7 @@ class Recrutement extends Component {
 
   render() {
     const recruesList = this.props.recrues.map((recrue) =>
-      <li key={recrue.id} draggable="true" onDragStart={this.drag}>
+      <li key={recrue.id} draggable="true" onDragStart={this.dragRecrueStart} onDragEnd={this.dragRecrueEnd}>
           <div className="pp"></div>
           <div className="name">{recrue.name}</div>
           <ul className="stats">

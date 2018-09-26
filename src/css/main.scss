@@ -18,6 +18,9 @@ nav {
     margin: 2%;
     padding: 3px;
     background: #eee;
+    &.drag-over {
+      outline: 1px dashed purple;
+    }
   }
   li {
     flex: 1;
