@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class ChatTab extends Component {
   state = {
-    openStatus : (this.props.open) ? 'show' : 'hide'
+    openStatus : this.props.open
   };
 
   // TODO : le openStatus n'est pas setté ;
@@ -11,7 +11,7 @@ class ChatTab extends Component {
 
   render() {
     return (
-      <li className={this.state.open}>
+      <li className={this.state.openStatus}>
 
       </li>
     );

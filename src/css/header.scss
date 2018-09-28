@@ -108,3 +108,15 @@ header {
   color: red;
 }
 
+.chat-tabs li {
+
+}
+.chat-contents li {
+
+  &.show {
+    display: block;
+  }
+  &.hide {
+    display: none;
+  }
+}

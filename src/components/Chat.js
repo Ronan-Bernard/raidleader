@@ -3,9 +3,9 @@ import ChatTab from "./ChatTab";
 
 class Chat extends Component {
   state = {
-    openChat: true,
-    openRanking: false,
-    openHelp: false
+    openChat: 'show',
+    openRanking: 'hide',
+    openHelp: 'hide'
   }
 
   open(e, tab) {
@@ -16,9 +16,9 @@ class Chat extends Component {
     return (
       <div className="chat-wrapper">
         <ul className="chat-tabs">
-          <li onClick={this.open('chat')}>Chat</li>
-          <li onClick={this.open('ranking')}>Classement</li>
-          <li onClick={this.open('help')}>?</li>
+          <li onClick={this.open('chat')} className={this.state.openChat}>Chat</li>
+          <li onClick={this.open('ranking')} className={this.state.openRanking}>Classement</li>
+          <li onClick={this.open('help')} className={this.state.openHelp}>?</li>
         </ul>
         <ul className="chat-contents">
           <ChatTab key="chat" open={this.state.openChat} />
