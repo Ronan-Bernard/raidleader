@@ -7,9 +7,22 @@ class Recrutement extends Component {
     document.onselectstart = this.selectStart;
   }
 
+  handleDragOverRaidEvents(e) {
+    // e.clientX et e.clientY doivent correspondre à un des nav > ul
+
+    // ('group1').offsetLeft et offsetTop
+    let group1 = document.getElementById('group1');
+
+    if ((group1.offsetLeft <= e.clientX <= (group1.offsetLeft + group1.innerWidth))
+      && (group1.offsetTop <= e.clientY <= (group1.offsetTop + group1.innerHeight))) {
+      console.log('over group1');
+    }
+  }
+
   dragRecrueStart(e) {
     e.dataTransfer.setData("text/plain", e.target.id);
     e.target.classList.add('dragging');
+    document.ondragover = this.handleDragOverRaidEvents;
   }
 
   dragRecrueEnd(e) {

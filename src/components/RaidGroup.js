@@ -18,6 +18,7 @@ class RaidGroup extends Component {
       emptySlots: emptySlots
     };
     _.concat(this.props.players, this.state.players);
+
   }
 
   componentWillUpdate() {
