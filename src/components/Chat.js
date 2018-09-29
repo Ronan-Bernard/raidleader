@@ -3,27 +3,46 @@ import ChatTab from "./ChatTab";
 
 class Chat extends Component {
   state = {
-    openChat: 'show',
-    openRanking: 'hide',
-    openHelp: 'hide'
+    chat: 'show',
+    ranking: 'hide',
+    help: 'hide'
   }
 
-  open(e, tab) {
-
+  open(tab) {
+    console.log('open');
+    if (tab === 'chat') {
+      this.setState({
+        chat: 'show',
+        ranking: 'hide',
+        help: 'hide'
+      });
+    } else if (tab === 'ranking') {
+      this.setState({
+        chat: 'hide',
+        ranking: 'show',
+        help: 'hide'
+      });
+    } else if (tab === 'help') {
+      this.setState({
+        chat: 'hide',
+        ranking: 'hide',
+        help: 'show'
+      });
+    }
   }
 
   render() {
     return (
       <div className="chat-wrapper">
         <ul className="chat-tabs">
-          <li onClick={this.open('chat')} className={this.state.openChat}>Chat</li>
-          <li onClick={this.open('ranking')} className={this.state.openRanking}>Classement</li>
-          <li onClick={this.open('help')} className={this.state.openHelp}>?</li>
+          <li onClick={() => {this.open('chat')}} className={this.state.chat}>Chat</li>
+          <li onClick={() => {this.open('ranking')}} className={this.state.ranking}>Classement</li>
+          <li onClick={() => {this.open('help')}} className={this.state.help}>?</li>
         </ul>
         <ul className="chat-contents">
-          <ChatTab key="chat" open={this.state.openChat} />
-          <ChatTab key="ranking" open={this.state.openRanking} />
-          <ChatTab key="help" open={this.state.openHelp} />
+          <ChatTab key="chat" open={this.state.chat} />
+          <ChatTab key="ranking" open={this.state.ranking} />
+          <ChatTab key="help" open={this.state.help} />
         </ul>
       </div>
     );

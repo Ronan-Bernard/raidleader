@@ -120,6 +120,9 @@ header {
     border: 1px solid saddlebrown;
     border-radius: 5px 5px 0 0;
     background: #f5f2dc;
+    &.hide {
+      cursor: pointer;
+    }
     &.show {
       border-bottom: 0;
     }
@@ -129,9 +132,11 @@ header {
   margin: 0 1em 4px;
   padding: 0;
   border: 1px solid saddlebrown;
+  border-radius: 5px;
   li {
     height: 92px;
     background: #f5f2dc;
+    border-radius: 5px;
     &.show {
       display: block;
     }
