@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import Recrutement from './Recrutement';
 import Chat from './Chat';
-import recrueWorker from 'worker!../workers/recruesWorker.js';  // eslint-disable-line import/no-webpack-loader-syntax
+import recrueWorker from 'worker-loader!../workers/recruesWorker.js';  // eslint-disable-line import/no-webpack-loader-syntax
 let _ = require('lodash');
 
 class Header extends Component {
@@ -12,8 +12,8 @@ class Header extends Component {
     }
   }
   componentWillMount() {
-    this.recruesWorker = new recrueWorker('../workers/recruesWorker.js');
-    this.recruesWorker.onmessage = (m) => {
+   this.recruesWorker = new recrueWorker('../workers/recruesWorker.js');
+   this.recruesWorker.onmessage = (m) => {
       let nouvelleRecrue = [m.data.infosRecrue];
       let newListRecrues = _.concat(nouvelleRecrue, this.state.recrues);
 
