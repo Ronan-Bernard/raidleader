@@ -9,13 +9,12 @@ class RecrueStat extends Component {
     }
   }
 
-  componentDidUpdate(props) {
-    this.state = {
+  componentWillReceiveProps(props) {
+    this.setState({
       stat: props.stat,
       type: props.type
-    };
+    });
   }
-
   render() {
     return (
       <li className={this.state.type}>
