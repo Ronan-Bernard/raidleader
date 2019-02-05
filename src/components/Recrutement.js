@@ -1,32 +1,47 @@
 import React, {Component} from "react";
 import RecrueStat from './RecrueStat';
+import { connect } from 'react-redux';
+import store from '../stores';
 
 class Recrutement extends Component {
+  hoveredGroup;
   constructor(props) {
     super(props);
     document.onselectstart = this.selectStart;
   }
 
   handleDragOverRaidEvents(e) {
-    // e.clientX et e.clientY doivent correspondre à un des nav > ul
-
-    // ('group1').offsetLeft et offsetTop
-    let group1 = document.getElementById('group1');
-
-    if ((group1.offsetLeft <= e.clientX <= (group1.offsetLeft + group1.innerWidth))
-      && (group1.offsetTop <= e.clientY <= (group1.offsetTop + group1.innerHeight))) {
-      console.log('over group1');
+    if (Recrutement.prototype.isOverElement(e, 'group1')) {
+      Recrutement.prototype.hoverGroup('group1');
+      this.hoveredGroup = 'group1';
+    } else {
+      this.hoveredGroup = false;
     }
+  }
+  hoverGroup(group) {
+    // FIXME register en event pour pouvoir le dispatcher ?
+    console.log('euh non');
+  };
+
+  isOverElement(e, elementId) {
+    let item = document.getElementById(elementId);
+    return (item.offsetLeft <= e.clientX
+      && e.clientX <= (item.offsetLeft + item.offsetWidth)
+      && item.offsetTop <= e.clientY
+      && e.clientY <= (item.offsetTop + item.offsetHeight));
   }
 
   dragRecrueStart(e) {
     e.dataTransfer.setData("text/plain", e.target.id);
     e.target.classList.add('dragging');
-    document.ondragover = this.handleDragOverRaidEvents;
+    document.ondragover = Recrutement.prototype.handleDragOverRaidEvents;
   }
 
   dragRecrueEnd(e) {
     e.target.classList.remove('dragging');
+    if (Recrutement.hoveredGroup) {
+      console.log('drop sur' + Recrutement.hoveredGroup);
+    }
   }
 
   selectStart(e) {
@@ -34,7 +49,7 @@ class Recrutement extends Component {
   }
 
   render() {
-    const recruesList = this.props.recrues.map((recrue) =>
+    const recruesList = this.props.candidats.map((recrue) =>
       <li key={recrue.id} draggable="true" onDragStart={this.dragRecrueStart} onDragEnd={this.dragRecrueEnd}>
           <div className="pp"></div>
           <div className="name">{recrue.name}</div>
@@ -57,4 +72,15 @@ class Recrutement extends Component {
   }
 }
 
-export default Recrutement;
+// export default Recrutement;
+
+const mapStateToProps = ({ recruesList}) => ({ recruesList });
+
+const mapDispatchToProps = dispatch => ({
+  hoverGroup: (group) => dispatch({ type : 'register_hovered_group', group: group})
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Recrutement);

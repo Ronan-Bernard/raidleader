@@ -8,19 +8,19 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      recrues: []
+      candidats: []
     }
   }
   componentWillMount() {
    this.recruesWorker = new recrueWorker('../workers/recruesWorker.js');
    this.recruesWorker.onmessage = (m) => {
       let nouvelleRecrue = [m.data.infosRecrue];
-      let newListRecrues = _.concat(nouvelleRecrue, this.state.recrues);
+      let newListRecrues = _.concat(nouvelleRecrue, this.state.candidats);
 
       if (newListRecrues.length > 4) {
         newListRecrues.pop();
       }
-      this.setState({recrues: newListRecrues});
+      this.setState({candidats: newListRecrues});
     }
   }
 
@@ -28,7 +28,7 @@ class Header extends Component {
     return(
       <header>
         <Chat />
-        <Recrutement recrues={this.state.recrues} />
+        <Recrutement candidats={this.state.candidats} />
       </header>
     );
   }
