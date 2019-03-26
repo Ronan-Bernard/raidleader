@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class Commands extends Component {
 
   render() {
+    const {
+      pauseJeu
+    } = this.props;
+
     return(
       <ul className="commands">
-        <li>Pause</li>
+        <button type="button" onClick={pauseJeu}>Pause</button>
         <li>Se plaindre</li>
         <li>Focus</li>
         <li>Déplacer groupe</li>
@@ -15,4 +20,13 @@ class Commands extends Component {
   }
 }
 
-export default Commands;
+const mapStateToProps = ({ recruesList}) => ({ recruesList });
+
+const mapDispatchToProps = dispatch => ({
+  pauseJeu: () => dispatch({type : 'game_pause'})
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Commands);

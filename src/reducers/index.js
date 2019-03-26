@@ -1,8 +1,12 @@
-import { combineReducers } from 'redux'
-// import collection from './collection';
+import { combineReducers } from 'redux';
+import commandesReducer from './commandes';
+import recrutementReducer from './recrutement';
+import raidReducer from './raid';
 
 const reducers = combineReducers({
-//  collection
+  commandesReducer,
+  recrutementReducer,
+  raidReducer
 })
 
 export default reducers;

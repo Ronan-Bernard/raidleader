@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import RaidGroup from './RaidGroup';
+import { connect } from 'react-redux';
 
 class Raid extends Component {
   constructor(props) {
@@ -33,4 +34,13 @@ class Raid extends Component {
   }
 }
 
-export default Raid;
+const mapStateToProps = ({group1}) => ({ group1 });
+
+const mapDispatchToProps = dispatch => ({
+
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Raid);

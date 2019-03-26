@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import RecrueStat from './RecrueStat';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import store from '../stores';
 
@@ -12,16 +13,16 @@ class Recrutement extends Component {
 
   handleDragOverRaidEvents(e) {
     if (Recrutement.prototype.isOverElement(e, 'group1')) {
-      Recrutement.prototype.hoverGroup('group1');
-      this.hoveredGroup = 'group1';
+      store.dispatch({
+        type: 'register_hovered_group',
+        group: 'group1'
+      });
     } else {
-      this.hoveredGroup = false;
+      store.dispatch({
+        type: 'reset_hovered_group',
+      });
     }
   }
-  hoverGroup(group) {
-    // FIXME register en event pour pouvoir le dispatcher ?
-    console.log('euh non');
-  };
 
   isOverElement(e, elementId) {
     let item = document.getElementById(elementId);
@@ -42,6 +43,9 @@ class Recrutement extends Component {
     if (Recrutement.hoveredGroup) {
       console.log('drop sur' + Recrutement.hoveredGroup);
     }
+    store.dispatch({
+      type: 'drop_hovered_group'
+    });
   }
 
   selectStart(e) {
@@ -71,8 +75,6 @@ class Recrutement extends Component {
     );
   }
 }
-
-// export default Recrutement;
 
 const mapStateToProps = ({ recruesList}) => ({ recruesList });
 
