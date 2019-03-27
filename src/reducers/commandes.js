@@ -1,5 +1,4 @@
 const commandesReducer = (state = null, action) => {
-  let hoveredGroup;
   switch (action.type) {
     case 'game_pause':
     console.log('game pause');

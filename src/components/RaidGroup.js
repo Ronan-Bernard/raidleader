@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import { connect } from 'react-redux';
 let _ = require('lodash');
 
 class RaidGroup extends Component {
@@ -7,9 +8,10 @@ class RaidGroup extends Component {
     let numberOfEmptySlots = (this.props.players.length > 0) ? 5 - this.props.players.length : 5;
     let emptySlots = [];
 
+    let idBasis = ((this.props.group - 1) * 5);
     for (let i = 1; i <= numberOfEmptySlots; i++) {
       emptySlots.push({
-        id: i
+        id: idBasis + i
       });
     }
 
@@ -22,19 +24,21 @@ class RaidGroup extends Component {
   }
 
   componentWillUpdate() {
-    // TODO refaire les opérations présentes dans le constructeur, pour gérer les changements dans la liste de players et ajuster avec des players vides
+    // TODO refaire les opérations présentes dans le constructeur,
+    //  pour gérer les changements dans la liste de players et ajuster avec des players vides
   }
 
-  dragOverRaidGroup(e) {
-    document.getElementById(e.target.id).classList.add('drag-over');
-  }
-  // FIXME utiliser un drag et checker la position à chaque mouvement ? le over et le enter ne détectent pas assez bien l'élément réceptacle, trop petit
-
-  dragLeaveRaidGroup(e) {
-    document.getElementById(e.target.id).classList.remove('drag-over');
+  componentDidUpdate (prevProps, prevState) {
+    console.log('component update');
+    console.log(prevState.hoveredSlot);
   }
 
   render() {
+    const {
+      hoverSlot,
+      resetSlot
+    } = this.props;
+
     const playersList = this.state.players.map((player) =>
       <li key={player.id}
           id={'player' + player.id}
@@ -52,7 +56,9 @@ class RaidGroup extends Component {
     );
 // TODO emptyPlayer devrait etre un Player dont un champ rend empty à true.... Une seule liste !
     return (
-      <ul onDragOver={this.dragOverRaidGroup} onDragLeave={this.dragLeaveRaidGroup} id={'group' + this.props.group}>
+      <ul onDragOver={hoverSlot}
+        onDragLeave={resetSlot}
+        id={'group' + this.props.group}>
         {playersList}
         {emptyList}
       </ul>
@@ -60,4 +66,14 @@ class RaidGroup extends Component {
   }
 }
 
-export default RaidGroup;
+const mapStateToProps = ({ hoveredSlot }) => ({ hoveredSlot });
+
+const mapDispatchToProps = dispatch => ({
+  hoverSlot: (e) => dispatch({ type : 'register_hovered_slot', e: e}),
+  resetSlot: (e) => dispatch({ type : 'reset_hovered_slot'})
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RaidGroup);

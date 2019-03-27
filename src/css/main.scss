@@ -27,6 +27,20 @@ nav {
     margin-bottom: 1px;
     display: block;
     width: 100%;
+    position: relative;
+  }
+  li.drag-over {
+    outline: 1px dotted red;
+  }
+  li.drag-over::after {
+    content: " ";
+    position: absolute;
+    top: 1px;
+    bottom: 1px;
+    left: 1px;
+    right: 1px;
+    background: red;
+    opacity: 0.4;
   }
   li.hovered {
     border: 1px dashed gray;

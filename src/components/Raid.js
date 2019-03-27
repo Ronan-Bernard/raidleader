@@ -13,7 +13,6 @@ class Raid extends Component {
   }
 
   allowDrop(e) {
-    var data = e.dataTransfer.getData('text/plain');
     e.preventDefault();
   }
 
