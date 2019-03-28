@@ -6,11 +6,11 @@ const raidGroupReducer = (state = null, action) => {
     case 'add_to_group':
     // receive action.recrueKey, action.slot
       let addInfos = {
-        recrueKey: action.recrueKey,
+        recrue: action.recrue,
         slot: this.hoveredSlot
       };
       this.hoveredSlot = null;
-      return addInfos;
+      return state;
     case 'register_hovered_slot':
       let slotId = action.e.target.id;
       document.getElementById(slotId).classList.add('drag-over');

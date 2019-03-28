@@ -3,6 +3,7 @@ import RecrueStat from './RecrueStat';
 import uiUtil from '../utils/uiUtil';
 import { connect } from 'react-redux';
 import store from '../stores';
+let _ = require('lodash');
 
 class Recrutement extends Component {
   constructor(props) {
@@ -10,25 +11,45 @@ class Recrutement extends Component {
     document.onselectstart = this.avoidMouseTextSelection;
     document.ondragstart = this.dragRecrueStart;
     document.ondragend = this.dragRecrueEnd;
+
+    this.state = {
+      playersList: props.playersList
+    }
   }
 
-  dragRecrueStart(e) {
+  componentDidUpdate(prevProps, prevState) {
+    console.log('update');
+    console.log(prevState);
+
+  }
+
+  dragRecrueStart = (e) => {
     e.dataTransfer.setData("text/plain", e.target.getAttribute('data-recrue-key'));
     e.target.classList.add('dragging');
   }
 
-  dragRecrueEnd(e) {
+  dragRecrueEnd = (e) => {
     e.target.classList.remove('dragging');
-    // TODO trouver recrue dans props.candidats et renvoyer tout l'objet
-    let addRecrue = store.dispatch({
+    let recrueToAddIndex = _.findIndex(this.props.candidats, [
+      'id', parseInt(e.dataTransfer.getData("text/plain"))
+    ]);
+    let addRecrueInfos = store.dispatch({
       type: 'add_to_group',
-      recrueKey: e.dataTransfer.getData("text/plain")
+      recrue: this.props.candidats[recrueToAddIndex]
     });
+    // TODO il faut un callback
+    // je passe la recrue, ensuite dans App on va transmettre la nvlle liste
+    // this.handleAddRecrue(addRecrueInfos);
   }
 
-  handleAddRecrue(infos) {
+  handleAddRecrue = (infos) => {
     // TODO ici on va vérifier recrueKey et slot
+    // TODO supprimer de recruesList, ici ou dans le reducer
+    // (en fait de props.candidats)
     // si ok, on rajoute la recrue au slot indiqué
+    this.props.stateHandler({
+      playersList: this.props.playersList.push(infos.recrueKey)
+    });
   }
 
   avoidMouseTextSelection(e) {

@@ -7,9 +7,16 @@ let _ = require('lodash');
 class Header extends Component {
   constructor(props) {
     super(props);
+    this.stateHandler = this.stateHandler.bind(this)
     this.state = {
-      candidats: []
+      candidats: [],
+      playersList: props.playersList
     }
+  }
+  stateHandler() {
+    this.setState({
+      playersList: this.playersList
+    });
   }
   componentWillMount() {
    this.recruesWorker = new recrueWorker('../workers/recruesWorker.js');
@@ -28,7 +35,9 @@ class Header extends Component {
     return(
       <header>
         <Chat />
-        <Recrutement candidats={this.state.candidats} />
+        <Recrutement candidats={this.state.candidats}
+          playersList={this.state.playersList}
+          stateHandler={this.stateHandler} />
       </header>
     );
   }
