@@ -1,26 +1,45 @@
 const raidGroupReducer = (state = null, action) => {
-  let hoveredSlot;
-  let playerList;
+  const emptyState = {
+    hoveredSlot: null,
+    playersList: []
+  }
 
   switch (action.type) {
+    case 'load_players_list':
+      return Object.assign({}, state, {
+        playersList: action.playersList
+      });
+
     case 'add_to_group':
-    // receive action.recrueKey, action.slot
-      let addInfos = {
-        recrue: action.recrue,
-        slot: this.hoveredSlot
-      };
-      this.hoveredSlot = null;
-      return state;
+      let tmpPlayersList = Object.assign(state.playersList);
+      tmpPlayersList[state.hoveredSlot] = action.recrue;
+      console.log(state.hoveredSlot);
+      console.log(tmpPlayersList);
+
+      return Object.assign({}, state, {
+        hoveredSlot: null,
+        playersList: tmpPlayersList
+      });
+
     case 'register_hovered_slot':
       let slotId = action.e.target.id;
       document.getElementById(slotId).classList.add('drag-over');
-      this.hoveredSlot = slotId;
-    return this.hoveredSlot;
+      return Object.assign({}, state, {
+        hoveredSlot: slotId
+      });
+    case 'hide_hovered_slot':
+      document.querySelectorAll('.drag-over').forEach(function(i) {
+        i.classList.remove('drag-over');
+      });
+      return state;
     case 'reset_hovered_slot':
       document.querySelectorAll('.drag-over').forEach(function(i) {
         i.classList.remove('drag-over');
       });
-    return state;
+      return Object.assign({}, state, {
+        hoveredSlot: null
+      });
+
     default:
     return state;
   }

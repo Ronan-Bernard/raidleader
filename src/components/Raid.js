@@ -10,6 +10,7 @@ class Raid extends Component {
     this.group3 = [];
     this.group4 = [];
     // retrieve players from save
+    this.props.playersList = [];
   }
 
   allowDrop(e) {
@@ -33,7 +34,7 @@ class Raid extends Component {
   }
 }
 
-const mapStateToProps = ({group1}) => ({ group1 });
+const mapStateToProps = ({playersList}) => ({ playersList });
 
 const mapDispatchToProps = dispatch => ({
 

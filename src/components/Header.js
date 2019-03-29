@@ -10,7 +10,6 @@ class Header extends Component {
     this.stateHandler = this.stateHandler.bind(this)
     this.state = {
       candidats: [],
-      playersList: props.playersList
     }
   }
   stateHandler() {
@@ -36,7 +35,6 @@ class Header extends Component {
       <header>
         <Chat />
         <Recrutement candidats={this.state.candidats}
-          playersList={this.state.playersList}
           stateHandler={this.stateHandler} />
       </header>
     );

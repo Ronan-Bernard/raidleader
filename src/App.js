@@ -9,9 +9,10 @@ import store from './stores';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
+    store.dispatch({
+      type: 'load_players_list',
       playersList: this.loadPlayersList()
-    }
+    })
   }
 
   loadPlayersList = () => {
@@ -27,7 +28,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <div className="App">
-          <Header playersList={this.state.playersList} />
+          <Header />
           <Raid />
           <main>
             L'affichage du combat / préparation du raid

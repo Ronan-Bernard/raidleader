@@ -36,10 +36,10 @@ class RaidGroup extends Component {
   render() {
     const {
       hoverSlot,
-      resetSlot
+      hideSlots
     } = this.props;
 
-    const playersList = this.state.players.map((player) =>
+    const groupPlayersList = this.state.players.map((player) =>
       <li key={player.id}
           id={'player' + player.id}
           empty="false">
@@ -57,9 +57,9 @@ class RaidGroup extends Component {
 // TODO emptyPlayer devrait etre un Player dont un champ rend empty à true.... Une seule liste !
     return (
       <ul onDragOver={hoverSlot}
-        onDragLeave={resetSlot}
+        onDragLeave={hideSlots}
         id={'group' + this.props.group}>
-        {playersList}
+        {groupPlayersList}
         {emptyList}
       </ul>
     );
@@ -70,7 +70,7 @@ const mapStateToProps = ({ hoveredSlot }) => ({ hoveredSlot });
 
 const mapDispatchToProps = dispatch => ({
   hoverSlot: (e) => dispatch({ type : 'register_hovered_slot', e: e}),
-  resetSlot: (e) => dispatch({ type : 'reset_hovered_slot'})
+  hideSlots: (e) => dispatch({ type : 'hide_hovered_slot'})
 });
 
 export default connect(
