@@ -1,72 +1,67 @@
 import React, {Component} from "react";
 import { connect } from 'react-redux';
+import store from '../stores';
 let _ = require('lodash');
 
 class RaidGroup extends Component {
   constructor(props) {
     super(props);
-    let numberOfEmptySlots = (this.props.players.length > 0) ? 5 - this.props.players.length : 5;
-    let emptySlots = [];
 
-    let idBasis = ((this.props.group - 1) * 5);
-    for (let i = 1; i <= numberOfEmptySlots; i++) {
-      emptySlots.push({
-        id: idBasis + i
-      });
+    let idBasis = ((this.props.group - 1) * 5) + 1;
+    let currentPlayersList = store.getState().raidGroupReducer.playersList;
+    let groupPlayers = [];
+
+    let j = parseInt(idBasis);
+    for (j; j < (idBasis + 5); j++) {
+      groupPlayers.push(currentPlayersList['player' + j]);
     }
 
-    this.state = {
-      players: [],
-      emptySlots: emptySlots
-    };
-    _.concat(this.props.players, this.state.players);
+    console.log(groupPlayers);
 
+    this.state = {
+      players: groupPlayers
+    }
   }
 
-  componentWillUpdate() {
-    // TODO refaire les opérations présentes dans le constructeur,
-    //  pour gérer les changements dans la liste de players et ajuster avec des players vides
+  componentWillReceiveProps(props) {
+    console.log(props);
   }
 
   componentDidUpdate (prevProps, prevState) {
-    console.log('component update');
-    console.log(prevState.hoveredSlot);
+    console.log('component RaidGroup update');
+    console.log(prevState);
   }
 
   render() {
     const {
       hoverSlot,
-      hideSlots
+      hideSlots,
+      playersList
     } = this.props;
 
     const groupPlayersList = this.state.players.map((player) =>
       <li key={player.id}
           id={'player' + player.id}
           empty="false">
-        <i class={"ra ra-" + player.heroClass} />
+        <i className={player.heroClass ? "ra ra-" + player.heroClass : ""} />
       </li>
     );
 
-    const emptyList = this.state.emptySlots.map((emptyPlayer) =>
-      <li key={emptyPlayer.id}
-          id={'player' + emptyPlayer.id}
-          empty="true">
-        &nbsp;
-      </li>
-    );
-// TODO emptyPlayer devrait etre un Player dont un champ rend empty à true.... Une seule liste !
     return (
       <ul onDragOver={hoverSlot}
         onDragLeave={hideSlots}
         id={'group' + this.props.group}>
         {groupPlayersList}
-        {emptyList}
       </ul>
     );
   }
 }
 
-const mapStateToProps = ({ hoveredSlot }) => ({ hoveredSlot });
+const mapStateToProps = (state) => {
+  return {
+    playersList: state.raidGroupReducer.playersList
+  };
+}
 
 const mapDispatchToProps = dispatch => ({
   hoverSlot: (e) => dispatch({ type : 'register_hovered_slot', e: e}),

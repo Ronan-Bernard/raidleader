@@ -11,14 +11,12 @@ const raidGroupReducer = (state = null, action) => {
       });
 
     case 'add_to_group':
-      let tmpPlayersList = Object.assign(state.playersList);
-      tmpPlayersList[state.hoveredSlot] = action.recrue;
-      console.log(state.hoveredSlot);
-      console.log(tmpPlayersList);
+      let newPlayersList = Object.assign(state.playersList);
+      newPlayersList[state.hoveredSlot] = action.recrue;
 
       return Object.assign({}, state, {
         hoveredSlot: null,
-        playersList: tmpPlayersList
+        playersList: newPlayersList
       });
 
     case 'register_hovered_slot':
