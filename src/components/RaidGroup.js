@@ -1,47 +1,26 @@
 import React, {Component} from "react";
 import { connect } from 'react-redux';
 import store from '../stores';
-let _ = require('lodash');
 
 class RaidGroup extends Component {
   constructor(props) {
     super(props);
-
-    let idBasis = ((this.props.group - 1) * 5) + 1;
-    let currentPlayersList = store.getState().raidGroupReducer.playersList;
-    let groupPlayers = [];
-
-    let j = parseInt(idBasis);
-    for (j; j < (idBasis + 5); j++) {
-      groupPlayers.push(currentPlayersList['player' + j]);
-    }
-
-    console.log(groupPlayers);
-
-    this.state = {
-      players: groupPlayers
-    }
   }
 
-  componentWillReceiveProps(props) {
-    console.log(props);
-  }
-
-  componentDidUpdate (prevProps, prevState) {
-    console.log('component RaidGroup update');
-    console.log(prevState);
+  componentDidUpdate(prevState) {
+    console.log('update');
   }
 
   render() {
     const {
       hoverSlot,
       hideSlots,
-      playersList
+      groupPlayers
     } = this.props;
 
-    const groupPlayersList = this.state.players.map((player) =>
+    const groupPlayersList = this.props.groupPlayers.map((player) =>
       <li key={player.id}
-          id={'player' + player.id}
+          id={player.id}
           empty="false">
         <i className={player.heroClass ? "ra ra-" + player.heroClass : ""} />
       </li>
@@ -57,10 +36,17 @@ class RaidGroup extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
+  let updatedGroupPlayers = [];
+  if (state !== undefined && state.raidGroupReducer.playersList !== undefined) {
+      let idBasis = ((ownProps.group - 1) * 5) + 1;
+      for (var l = idBasis; l < (idBasis + 5); l++) {
+        updatedGroupPlayers.push(state.raidGroupReducer.playersList['player' + l]);
+      }
+  }
   return {
-    playersList: state.raidGroupReducer.playersList
-  };
+    groupPlayers: updatedGroupPlayers,
+  }
 }
 
 const mapDispatchToProps = dispatch => ({
