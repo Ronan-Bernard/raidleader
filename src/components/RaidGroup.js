@@ -7,8 +7,8 @@ class RaidGroup extends Component {
     super(props);
   }
 
-  componentDidUpdate(prevState) {
-    console.log('update');
+  shouldComponentUpdate(nextProps, nextState) {
+    return (nextProps.groupPlayers != this.props.groupPlayers);
   }
 
   render() {

@@ -63,11 +63,9 @@ class Recrutement extends Component {
   }
 }
 
-const mapStateToProps = ({ recruesList}) => ({ recruesList });
-
 const mapDispatchToProps = dispatch => ({});
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(Recrutement);
