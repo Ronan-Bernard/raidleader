@@ -28,6 +28,14 @@ nav {
     display: block;
     width: 100%;
     position: relative;
+    padding: 2px;
+    span {
+      font-family: "grobold";
+      font-size: 11px;
+    }
+    span::first-letter {
+      text-transform: uppercase;
+    }
   }
   li.drag-over {
     outline: 1px dotted red;

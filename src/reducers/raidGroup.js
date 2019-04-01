@@ -8,6 +8,7 @@ const raidGroupReducer = (state = null, action) => {
     case 'add_to_group':
       let newPlayersList = Object.assign(state.playersList);
       newPlayersList[state.hoveredSlot] = action.recrue;
+
       return Object.assign({}, state, {
         hoveredSlot: null,
         playersList: newPlayersList

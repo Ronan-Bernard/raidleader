@@ -4,3 +4,5 @@ Changer l'icône de la souris quand on est sur un élément droppable (un slot p
 
 Utiliser les assets woodUI pour avoir une interface regardable, là c'est vraiment trop moche.
 Charger les players depuis la mémoire locale ou un backend distant.
+
+utiliser appSettings dans recruesWorker

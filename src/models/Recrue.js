@@ -21,9 +21,9 @@ class Recrue {
 
   generateName() {
     let syllabes = [
-      'ana','bar','col','de','fa','god','guy','h','ha','i',
+      'ana','ba','bar','col','de','fa','god','guy','h','ha','i',
       'ji','jo','k','kal','lem','la','lim',
-      'ma','mo','mau','ni',
+      'ma','mo','mi','ni',
       'pan','pim','per','qua','ren','ro','sad','Super','tu','Uber',
       'va','vé','wal','X','xa','yo','yang','zo','zé'
     ];

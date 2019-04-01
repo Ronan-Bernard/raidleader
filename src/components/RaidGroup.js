@@ -8,28 +8,30 @@ class RaidGroup extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return (nextProps.groupPlayers != this.props.groupPlayers);
+    return (nextProps.groupPlayers !== this.props.groupPlayers);
   }
 
   render() {
     const {
       hoverSlot,
       hideSlots,
-      groupPlayers
+      groupPlayers,
+      group
     } = this.props;
 
-    const groupPlayersList = this.props.groupPlayers.map((player) =>
+    const groupPlayersList = groupPlayers.map((player, index) =>
       <li key={player.id}
-          id={player.id}
+          id={'player' + ++index}
           empty="false">
         <i className={player.heroClass ? "ra ra-" + player.heroClass : ""} />
+        <span>{player.name}</span>
       </li>
     );
 
     return (
       <ul onDragOver={hoverSlot}
         onDragLeave={hideSlots}
-        id={'group' + this.props.group}>
+        id={'group' + group}>
         {groupPlayersList}
       </ul>
     );

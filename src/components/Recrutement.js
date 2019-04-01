@@ -13,9 +13,6 @@ class Recrutement extends Component {
     document.ondragend = this.dragRecrueEnd;
   }
 
-  componentDidUpdate(prevProps, prevState) {
-  }
-
   dragRecrueStart = (e) => {
     e.dataTransfer.setData("text/plain", e.target.getAttribute('data-recrue-key'));
     e.target.classList.add('dragging');
@@ -63,9 +60,19 @@ class Recrutement extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({});
+const mapStateToProps = (state) => {
+  if (state !== undefined
+    && state.recrutementReducer != undefined
+    && state.recrutementReducer.candidats !== undefined) {
+    return {
+      candidats: state.recrutementReducer.candidats
+    }
+  } else {
+    return state;
+  }
+}
 
 export default connect(
-  null,
-  mapDispatchToProps
+  mapStateToProps,
+  null
 )(Recrutement);
