@@ -15,10 +15,14 @@ const raidGroupReducer = (state = null, action) => {
 
     case 'register_hovered_slot':
       let slotId = action.e.target.id;
-      document.getElementById(slotId).classList.add('drag-over');
-      return Object.assign({}, state, {
-        hoveredSlot: slotId
-      });
+      if (state.hoveredSlot === undefined || state.hoveredSlot != slotId) {
+        document.getElementById(slotId).classList.add('drag-over');
+        return Object.assign({}, state, {
+          hoveredSlot: slotId
+        });
+      } else {
+        return state;
+      }
     case 'hide_hovered_slot':
       document.querySelectorAll('.drag-over').forEach(function(i) {
         i.classList.remove('drag-over');
