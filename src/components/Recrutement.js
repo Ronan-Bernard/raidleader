@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import RecrueStat from './RecrueStat';
-import uiUtil from '../utils/uiUtil';
 import { connect } from 'react-redux';
 import store from '../stores';
 let _ = require('lodash');
@@ -19,6 +18,10 @@ class Recrutement extends Component {
     }
   }
 
+  dragOverAll = (e) => {
+    this.lastDragOverEvent = e;
+  }
+
   dragRecrueStart = (e) => {
     draggedRecrueKey = e.target.getAttribute('data-recrue-key');
     e.dataTransfer.setData("text/plain", draggedRecrueKey);
@@ -26,18 +29,20 @@ class Recrutement extends Component {
     store.dispatch({
       type: 'reset_hovered_slot'
     });
+    document.ondragover = this.dragOverAll;
   }
 
   dragRecrueEnd = (e) => {
     e.target.classList.remove('dragging');
     let recrueToAddIndex = _.findIndex(this.props.candidats, [
-      'id', parseInt(draggedRecrueKey)
+      'id', parseInt(draggedRecrueKey, 10)
     ]);
     store.dispatch({
       type: 'add_to_group',
       recrue: this.props.candidats[recrueToAddIndex],
-      e: e
+      e: this.lastDragOverEvent
     });
+    document.ondragover = null;
   }
 
   avoidMouseTextSelection(e) {
@@ -76,11 +81,11 @@ class Recrutement extends Component {
 
 const mapStateToProps = (state) => {
   if (state !== null
-    && state.recrutementReducer !== null
-    && state.recrutementReducer.candidats !== undefined) {
+    && state.raidGroupReducer !== null
+    && state.raidGroupReducer.candidats !== undefined) {
       let updatedCandidats = [];
-      for (let i = 0; i < state.recrutementReducer.candidats.length; i++) {
-        updatedCandidats.push(Object.assign(state.recrutementReducer.candidats[i]));
+      for (let i = 0; i < state.raidGroupReducer.candidats.length; i++) {
+        updatedCandidats.push(Object.assign(state.raidGroupReducer.candidats[i]));
       }
     return {
       candidats: updatedCandidats,
