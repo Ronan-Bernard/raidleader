@@ -17,8 +17,10 @@ class RaidGroup extends Component {
 
     const groupPlayersList = groupPlayers.map((player, index) =>
       <li key={player.id}
-          id={'player' + ++index}
+          id={player.id}
           empty="false"
+          onDragOver={hoverSlot}
+          onDragLeave={hideSlots}
           >
         <i className={player.heroClass ? "ra ra-" + player.heroClass : ""} />
         <span>{player.name}</span>
@@ -26,9 +28,7 @@ class RaidGroup extends Component {
     );
 
     return (
-      <ul onDragOver={hoverSlot}
-        onDragLeave={hideSlots}
-        id={'group' + group}>
+      <ul id={'group' + group}>
         {groupPlayersList}
       </ul>
     );
@@ -48,9 +48,9 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  hoverSlot: (e) => dispatch({ type : 'register_hovered_slot', e: e}),
-  hideSlots: (e) => dispatch({ type : 'hide_hovered_slot'})
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  hoverSlot: (e) => dispatch({ type : 'register_hovered_slot', e: e, group: ownProps.group}),
+  hideSlots: (e) => dispatch({ type : 'hide_hovered_slot', e: e, group: ownProps.group})
 });
 
 export default connect(

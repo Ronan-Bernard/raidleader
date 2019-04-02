@@ -1,3 +1,5 @@
+let uiUtil = require('../utils/uiUtil');
+
 const raidGroupReducer = (state = null, action) => {
   switch (action.type) {
     case 'load_players_list':
@@ -6,13 +8,17 @@ const raidGroupReducer = (state = null, action) => {
       });
 
     case 'add_to_group':
-      let newPlayersList = Object.assign(state.playersList);
-      newPlayersList[state.hoveredSlot] = action.recrue;
+      if (uiUtil.isOverElement(action.e, state.hoveredSlot)) {
+        let newPlayersList = Object.assign(state.playersList);
+        newPlayersList[state.hoveredSlot] = action.recrue;
 
-      return Object.assign({}, state, {
-        hoveredSlot: null,
-        playersList: newPlayersList
-      });
+        return Object.assign({}, state, {
+          hoveredSlot: null,
+          playersList: newPlayersList
+        });
+      } else {
+        return state;
+      }
 
     case 'register_hovered_slot':
       let slotId = action.e.target.id;

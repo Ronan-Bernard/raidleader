@@ -14,7 +14,7 @@ const recrutementReducer = (state = null, action) => {
       let addedCandidat = Object.assign({}, state.candidats[candidatIndex], {
         available: false
       });
-      let updatedCandidats = Object.assign(state.candidats);
+      updatedCandidats = Object.assign(state.candidats);
       updatedCandidats[candidatIndex] = addedCandidat;
     return Object.assign({}, state, {
       candidats: updatedCandidats

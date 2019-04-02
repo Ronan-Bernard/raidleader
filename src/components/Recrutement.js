@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import store from '../stores';
 let _ = require('lodash');
 
+let draggedRecrueKey;
+
 class Recrutement extends Component {
   constructor(props) {
     super(props);
@@ -18,7 +20,8 @@ class Recrutement extends Component {
   }
 
   dragRecrueStart = (e) => {
-    e.dataTransfer.setData("text/plain", e.target.getAttribute('data-recrue-key'));
+    draggedRecrueKey = e.target.getAttribute('data-recrue-key');
+    e.dataTransfer.setData("text/plain", draggedRecrueKey);
     e.target.classList.add('dragging');
     store.dispatch({
       type: 'reset_hovered_slot'
@@ -28,11 +31,12 @@ class Recrutement extends Component {
   dragRecrueEnd = (e) => {
     e.target.classList.remove('dragging');
     let recrueToAddIndex = _.findIndex(this.props.candidats, [
-      'id', parseInt(e.dataTransfer.getData("text/plain"), 10)
+      'id', parseInt(draggedRecrueKey)
     ]);
     store.dispatch({
       type: 'add_to_group',
-      recrue: this.props.candidats[recrueToAddIndex]
+      recrue: this.props.candidats[recrueToAddIndex],
+      e: e
     });
   }
 
