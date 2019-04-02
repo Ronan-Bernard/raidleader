@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import RaidGroup from './RaidGroup';
 import store from '../stores';
-import { connect } from 'react-redux';
 
 class Raid extends Component {
   constructor(props) {

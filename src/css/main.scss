@@ -29,6 +29,12 @@ nav {
     width: 100%;
     position: relative;
     padding: 2px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    i {
+      margin-right: 3px;
+    }
     span {
       font-family: "grobold";
       font-size: 11px;

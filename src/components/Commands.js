@@ -20,8 +20,6 @@ class Commands extends Component {
   }
 }
 
-const mapStateToProps = ({ recruesList}) => ({ recruesList });
-
 const mapDispatchToProps = dispatch => ({
   pauseJeu: () => dispatch({type : 'game_pause'})
 });

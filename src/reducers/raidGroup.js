@@ -16,7 +16,7 @@ const raidGroupReducer = (state = null, action) => {
 
     case 'register_hovered_slot':
       let slotId = action.e.target.id;
-      if (state.hoveredSlot === undefined || state.hoveredSlot != slotId) {
+      if (state.hoveredSlot === undefined || state.hoveredSlot !== slotId) {
         document.getElementById(slotId).classList.add('drag-over');
         return Object.assign({}, state, {
           hoveredSlot: slotId

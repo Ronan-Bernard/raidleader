@@ -3,7 +3,6 @@ import Recrutement from './Recrutement';
 import Chat from './Chat';
 import recrueWorker from 'worker-loader!../workers/recruesWorker.js';  // eslint-disable-line import/no-webpack-loader-syntax
 import store from '../stores';
-let _ = require('lodash');
 
 class Header extends Component {
   constructor(props) {

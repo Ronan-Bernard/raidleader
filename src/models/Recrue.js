@@ -17,6 +17,7 @@ class Recrue {
       // inventaire de départ
     this.sex = (this.rnd(5) === 5) ? 'f': 'm';
     this.potentialSkill = this.rnd(5); // caché
+    this.available = true;
   }
 
   generateName() {

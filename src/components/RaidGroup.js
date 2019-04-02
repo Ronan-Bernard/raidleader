@@ -1,11 +1,7 @@
 import React, {Component} from "react";
 import { connect } from 'react-redux';
-import store from '../stores';
 
 class RaidGroup extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   shouldComponentUpdate(nextProps, nextState) {
     return (nextProps.groupPlayers !== this.props.groupPlayers);
@@ -22,7 +18,8 @@ class RaidGroup extends Component {
     const groupPlayersList = groupPlayers.map((player, index) =>
       <li key={player.id}
           id={'player' + ++index}
-          empty="false">
+          empty="false"
+          >
         <i className={player.heroClass ? "ra ra-" + player.heroClass : ""} />
         <span>{player.name}</span>
       </li>

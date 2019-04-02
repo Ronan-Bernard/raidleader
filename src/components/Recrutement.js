@@ -11,6 +11,10 @@ class Recrutement extends Component {
     document.onselectstart = this.avoidMouseTextSelection;
     document.ondragstart = this.dragRecrueStart;
     document.ondragend = this.dragRecrueEnd;
+
+    this.state = {
+      candidats: this.props.candidats
+    }
   }
 
   dragRecrueStart = (e) => {
@@ -24,7 +28,7 @@ class Recrutement extends Component {
   dragRecrueEnd = (e) => {
     e.target.classList.remove('dragging');
     let recrueToAddIndex = _.findIndex(this.props.candidats, [
-      'id', parseInt(e.dataTransfer.getData("text/plain"))
+      'id', parseInt(e.dataTransfer.getData("text/plain"), 10)
     ]);
     store.dispatch({
       type: 'add_to_group',
@@ -37,8 +41,14 @@ class Recrutement extends Component {
   }
 
   render() {
-    const recruesList = this.props.candidats.map((recrue) =>
-      <li key={recrue.id} data-recrue-key={recrue.id} draggable="true">
+    const {
+      candidats
+    } = this.props;
+
+    let recruesList = candidats.map((recrue) =>
+      <li key={recrue.id}
+          data-recrue-key={recrue.id}
+          draggable={recrue.available}>
           <div className="pp"></div>
           <div className="name">{recrue.name}</div>
           <ul className="stats">
@@ -61,11 +71,15 @@ class Recrutement extends Component {
 }
 
 const mapStateToProps = (state) => {
-  if (state !== undefined
-    && state.recrutementReducer != undefined
+  if (state !== null
+    && state.recrutementReducer !== null
     && state.recrutementReducer.candidats !== undefined) {
+      let updatedCandidats = [];
+      for (let i = 0; i < state.recrutementReducer.candidats.length; i++) {
+        updatedCandidats.push(Object.assign(state.recrutementReducer.candidats[i]));
+      }
     return {
-      candidats: state.recrutementReducer.candidats
+      candidats: updatedCandidats,
     }
   } else {
     return state;
@@ -73,6 +87,5 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(
-  mapStateToProps,
-  null
+  mapStateToProps
 )(Recrutement);
