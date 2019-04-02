@@ -1,16 +1,28 @@
 import React, {Component} from "react";
 import { connect } from 'react-redux';
 
+var hoveredSlot;
+
 class RaidGroup extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     return (nextProps.groupPlayers !== this.props.groupPlayers);
   }
 
+  hoverSlot = (e) => {
+    this.hideHoveredSlots();
+    window.hoveredSlot = e.target.id;
+    document.getElementById(window.hoveredSlot).classList.add('drag-over');
+  }
+
+  hideHoveredSlots = () => {
+    document.querySelectorAll('.drag-over').forEach(function(i) {
+      i.classList.remove('drag-over');
+    });
+  }
+
   render() {
     const {
-      hoverSlot,
-      hideSlots,
       groupPlayers,
       group
     } = this.props;
@@ -19,8 +31,8 @@ class RaidGroup extends Component {
       <li key={player.id}
           id={player.id}
           empty="false"
-          onDragOver={hoverSlot}
-          onDragLeave={hideSlots}
+          onDragOver={this.hoverSlot}
+          onDragLeave={this.hideSlots}
           >
         <i className={player.heroClass ? "ra ra-" + player.heroClass : ""} />
         <span>{player.name}</span>
@@ -48,12 +60,6 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  hoverSlot: (e) => dispatch({ type : 'register_hovered_slot', e: e, group: ownProps.group}),
-  hideSlots: (e) => dispatch({ type : 'hide_hovered_slot', e: e, group: ownProps.group})
-});
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(RaidGroup);

@@ -26,9 +26,7 @@ class Recrutement extends Component {
     draggedRecrueKey = e.target.getAttribute('data-recrue-key');
     e.dataTransfer.setData("text/plain", draggedRecrueKey);
     e.target.classList.add('dragging');
-    store.dispatch({
-      type: 'reset_hovered_slot'
-    });
+    window.hoveredSlot = null;
     document.ondragover = this.dragOverAll;
   }
 
