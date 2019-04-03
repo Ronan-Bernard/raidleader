@@ -6,4 +6,8 @@ module.exports = {
       && item.offsetTop <= e.clientY
       && e.clientY <= (item.offsetTop + item.offsetHeight));
   },
+  playersListIndexForSlot(slotId) {
+    let numericOnly = slotId.substr(6);
+    return (parseInt(numericOnly, 10) - 1);
+  }
 };

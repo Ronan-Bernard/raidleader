@@ -1,8 +1,6 @@
 import React, {Component} from "react";
 import { connect } from 'react-redux';
 
-var hoveredSlot;
-
 class RaidGroup extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -38,7 +36,7 @@ class RaidGroup extends Component {
           id={player.id}
           empty="false"
           onDragOver={this.hoverSlot}
-          onDragLeave={this.hideSlots}
+          onDragLeave={this.hideHoveredSlots}
           >
         <i className={player.heroClass ? "ra ra-" + player.heroClass : ""} />
         <span>{player.name}</span>
@@ -56,9 +54,9 @@ class RaidGroup extends Component {
 const mapStateToProps = (state, ownProps) => {
   let updatedGroupPlayers = [];
   if (state !== undefined && state.raidGroupReducer.playersList !== undefined) {
-      let idBasis = ((ownProps.group - 1) * 5) + 1;
-      for (var l = idBasis; l < (idBasis + 5); l++) {
-        updatedGroupPlayers.push(state.raidGroupReducer.playersList['player' + l]);
+      let indexBasis = ((ownProps.group - 1) * 5);
+      for (var i = indexBasis; i < (indexBasis + 5); i++) {
+        updatedGroupPlayers.push(state.raidGroupReducer.playersList[i]);
       }
   }
   return {

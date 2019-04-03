@@ -32,12 +32,12 @@ class Raid extends Component {
 
   loadPlayersList = () => {
     // TODO charger depuis la mémoire locale ou le serveur
-    let list = {};
+    let list = [];
     for (let i = 1; i<= 20; i++) {
-      list['player' + i] = {
+      list.push({
         id: 'player' + i,
         sex: 'z'
-      };
+      });
     }
     return list;
   }
@@ -46,7 +46,11 @@ class Raid extends Component {
     e.preventDefault();
   }
 
-  savePlayersList(playersList) {
+  savePlayersList = (playersList) => {
+    if (_.findIndex(playersList, function(i) { return i.sex != 'z'}) == -1) {
+      return;
+    }
+    console.log('should save');
   }
 
   render() {
