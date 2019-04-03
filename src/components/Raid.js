@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import RaidGroup from './RaidGroup';
+import { connect } from 'react-redux';
 import store from '../stores';
+let _ = require('lodash');
 
 class Raid extends Component {
   constructor(props) {
@@ -33,7 +35,8 @@ class Raid extends Component {
     let list = {};
     for (let i = 1; i<= 20; i++) {
       list['player' + i] = {
-        id: 'player' + i
+        id: 'player' + i,
+        sex: 'z'
       };
     }
     return list;
@@ -43,6 +46,9 @@ class Raid extends Component {
     e.preventDefault();
   }
 
+  savePlayersList(playersList) {
+  }
+
   render() {
     const {
       groupPlayers1,
@@ -50,15 +56,35 @@ class Raid extends Component {
       groupPlayers3,
       groupPlayers4
     } = this.state;
+    const savePlayersList = this.savePlayersList;
+
     return (
       <nav onDrop={this.allowDrop}>
-        <RaidGroup group="1" groupPlayers={groupPlayers1} />
-        <RaidGroup group="2" groupPlayers={groupPlayers2} />
-        <RaidGroup group="3" groupPlayers={groupPlayers3} />
-        <RaidGroup group="4" groupPlayers={groupPlayers4} />
+        <RaidGroup group="1" groupPlayers={groupPlayers1} saveHandler={savePlayersList} />
+        <RaidGroup group="2" groupPlayers={groupPlayers2} saveHandler={savePlayersList} />
+        <RaidGroup group="3" groupPlayers={groupPlayers3} saveHandler={savePlayersList} />
+        <RaidGroup group="4" groupPlayers={groupPlayers4} saveHandler={savePlayersList} />
       </nav>
     )
   }
 }
 
-export default Raid;
+const mapStateToProps = (state) => {
+  let updatedPlayersList;
+  if (state !== null
+    && state.raidGroupReducer !== null
+    && state.raidGroupReducer.playersList !== null) {
+      for (var l = 0; l < state.raidGroupReducer.playersList.size; l++) {
+        updatedPlayersList[l] = Object.assign(state.raidGroupReducer.playersList);
+      }
+      return {
+        playersList: updatedPlayersList
+      }
+  } else {
+    return state;
+  }
+}
+
+export default connect(
+  mapStateToProps
+)(Raid);

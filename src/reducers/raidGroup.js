@@ -16,7 +16,6 @@ const raidGroupReducer = (state = null, action) => {
       });
 
     case 'add_to_group':
-      console.log(window.hoveredSlot);
       if (uiUtil.isOverElement(action.e, window.hoveredSlot)) {
         let newPlayersList = Object.assign(state.playersList);
         newPlayersList[window.hoveredSlot] = action.recrue;

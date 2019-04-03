@@ -9,6 +9,12 @@ class RaidGroup extends Component {
     return (nextProps.groupPlayers !== this.props.groupPlayers);
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.group === '1') {
+      this.props.saveHandler(prevProps.playersList);
+    }
+  }
+
   hoverSlot = (e) => {
     this.hideHoveredSlots();
     window.hoveredSlot = e.target.id;
@@ -57,6 +63,7 @@ const mapStateToProps = (state, ownProps) => {
   }
   return {
     groupPlayers: updatedGroupPlayers,
+    playersList: state.raidGroupReducer.playersList
   }
 }
 
