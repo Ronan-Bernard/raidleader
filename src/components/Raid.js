@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import RaidGroup from './RaidGroup';
-import { connect } from 'react-redux';
 import store from '../stores';
 let _ = require('lodash');
 
@@ -47,7 +46,7 @@ class Raid extends Component {
   }
 
   savePlayersList = (playersList) => {
-    if (_.findIndex(playersList, function(i) { return i.sex != 'z'}) == -1) {
+    if (_.findIndex(playersList, function(i) { return i.sex !== 'z'}) === -1) {
       return;
     }
     console.log('should save');
@@ -73,22 +72,4 @@ class Raid extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  let updatedPlayersList;
-  if (state !== null
-    && state.raidGroupReducer !== null
-    && state.raidGroupReducer.playersList !== null) {
-      for (var l = 0; l < state.raidGroupReducer.playersList.size; l++) {
-        updatedPlayersList[l] = Object.assign(state.raidGroupReducer.playersList);
-      }
-      return {
-        playersList: updatedPlayersList
-      }
-  } else {
-    return state;
-  }
-}
-
-export default connect(
-  mapStateToProps
-)(Raid);
+export default Raid;
