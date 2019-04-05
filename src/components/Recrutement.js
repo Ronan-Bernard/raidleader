@@ -19,6 +19,7 @@ class Recrutement extends Component {
   }
 
   dragOverAll = (e) => {
+    console.log('dragOverAll');
     this.lastDragOverEvent = e;
   }
 

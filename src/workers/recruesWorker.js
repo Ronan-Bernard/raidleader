@@ -9,7 +9,7 @@ import Recrue from '../models/Recrue';
     let recrue = new Recrue(n);
     postMessage({ infosRecrue: recrue});
     if (!errors) {
-      setTimeout(function() { generateRecrue(n);}, 5000);
+      setTimeout(function() { generateRecrue(n);}, 30000);
     }
   }
     // LOAD appSettings.json

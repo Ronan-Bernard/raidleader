@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import RaidGroup from './RaidGroup';
 import store from '../stores';
+import { PlayerService } from '../service/PlayerService';
 let _ = require('lodash');
 
 class Raid extends Component {
@@ -50,6 +51,13 @@ class Raid extends Component {
       return;
     }
     console.log('should save');
+
+    const service = new PlayerService();
+    try {
+      const players = service.getPlayers();
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   render() {

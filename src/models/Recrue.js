@@ -1,5 +1,10 @@
-class Recrue {
+import {
+  Player
+} from './Player';
+
+class Recrue extends Player {
   constructor(props) {
+    super(props);
     if (!this.name) {
       this.id = props;
       this.generateInfos();

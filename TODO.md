@@ -6,4 +6,6 @@ Utiliser les assets woodUI pour avoir une interface regardable, là c'est vraime
 Charger les players depuis la mémoire locale ou un backend distant.
 
 utiliser appSettings dans recruesWorker
-Supprimer worker-loader vu qu'on utilise 
+Supprimer worker-loader vu qu'on utilise webworkify-webpack qui est mieux niveau compat.
+
+mettre des errors boundaries

@@ -25,7 +25,7 @@ header {
     display: flex;
     flex-direction: row;
     list-style-type: none;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     > li {
       width: $recrue-width;
       height: $recrue-height;
