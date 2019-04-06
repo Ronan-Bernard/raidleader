@@ -7,6 +7,8 @@ let _ = require('lodash');
 class Raid extends Component {
   constructor(props) {
     super(props);
+      this.playerService = new PlayerService();
+
       let initialPlayersList = this.loadPlayersList();
       store.dispatch({
         type: 'load_players_list',
@@ -33,6 +35,14 @@ class Raid extends Component {
   loadPlayersList = () => {
     // TODO charger depuis la mémoire locale ou le serveur
     let list = [];
+    try {
+      const players = this.playerService.getPlayers();
+      console.log(players);
+    } catch (e) {
+      console.error(e);
+    }
+
+
     for (let i = 1; i<= 20; i++) {
       list.push({
         id: 'player' + i,
@@ -52,12 +62,6 @@ class Raid extends Component {
     }
     console.log('should save');
 
-    const service = new PlayerService();
-    try {
-      const players = service.getPlayers();
-    } catch (e) {
-      console.error(e);
-    }
   }
 
   render() {

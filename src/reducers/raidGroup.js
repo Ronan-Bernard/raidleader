@@ -17,8 +17,11 @@ const raidGroupReducer = (state = null, action) => {
 
     case 'add_to_group':
       if (uiUtil.isOverElement(action.e, window.hoveredSlot)) {
+        let newPlayer = Object.assign({}, action.recrue, {
+          id: window.hoveredSlot
+        });
         let newPlayersList = Object.assign(state.playersList);
-        newPlayersList[uiUtil.playersListIndexForSlot(window.hoveredSlot)] = action.recrue;
+        newPlayersList[uiUtil.playersListIndexForSlot(window.hoveredSlot)] = newPlayer;
 
         let candidatIndex = _.findIndex(state.candidats, { 'id': action.recrue.id});
         let addedCandidat = Object.assign({}, state.candidats[candidatIndex], {
