@@ -10,6 +10,8 @@ export class Player {
   sex;
   potentialSkill;
   available;
+  hash;
+  creationDate;
 
   constructor(props) {
     if (this.props !== undefined && this.props.id) {

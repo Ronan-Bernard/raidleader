@@ -1,6 +1,7 @@
 import {
   Player
 } from './Player';
+let hash = require('hash.js');
 
 class Recrue extends Player {
   constructor(props) {
@@ -23,15 +24,17 @@ class Recrue extends Player {
     this.sex = (this.rnd(5) === 5) ? 'f': 'm';
     this.potentialSkill = this.rnd(5); // caché
     this.available = true;
+    this.creationDate = Date.now();
     this.hash = this.generateHash();
   }
 
   generateName() {
     let syllabes = [
-      'ana','ba','bar','col','de','fa','god','guy','h','ha','i',
-      'ji','jo','k','kal','lem','la','lim',
+      'a','ana','ba','bar','col','de','fa','god','guy','h','ha','i',
+      'jack','ji','jo','k','kal','lem','la','lim',
       'ma','mo','mi','ni',
-      'pan','pim','per','qua','ren','ro','sad','Super','tu','Uber',
+      'pan','pim','per','qua','ren','ro','sad','Super',
+      'tan','top','tu','Uber',
       'va','vé','wal','X','xa','yo','yang','zo','zé'
     ];
     let nomRandom = '';
@@ -52,7 +55,7 @@ class Recrue extends Player {
   }
 
   generateHash() {
-    
+    return hash.sha256().update(this.name + this.creationDate).digest('hex');
   }
 
   rnd(max) {
