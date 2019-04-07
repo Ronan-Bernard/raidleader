@@ -23,6 +23,7 @@ class Recrue extends Player {
     this.sex = (this.rnd(5) === 5) ? 'f': 'm';
     this.potentialSkill = this.rnd(5); // caché
     this.available = true;
+    this.hash = this.generateHash();
   }
 
   generateName() {
@@ -48,6 +49,10 @@ class Recrue extends Player {
     // bow, offheal, offtank
     // je pense que ça évoluera au fil du temps, pour forcer les joueurs à pick de nouvelles recrues ou à restuff
     return allClasses[this.rnd(3)];
+  }
+
+  generateHash() {
+    
   }
 
   rnd(max) {

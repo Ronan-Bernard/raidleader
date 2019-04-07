@@ -15,6 +15,7 @@ const initJsStore = async () => {
         if (isDbCreated) {
             idbCon.openDb(dbName);
         } else {
+          console.log('création de la db');
             idbCon.createDb(getDbSchema());
         }
 
@@ -25,17 +26,57 @@ const initJsStore = async () => {
 
 const getDbSchema = () => {
     var playersTable = {
-        name: 'player',
+        name: 'players',
         columns: [{
-                name: 'id',
-                primaryKey: true,
-                autoIncrement: true
+              name: 'id',
+              primaryKey: true,
+              autoIncrement: true
             },
             {
-                name: 'name',
-                notNull: true,
-                dataType: DATA_TYPE.String
-            }
+              name: 'hash',
+              notNull: true,
+              dataType: DATA_TYPE.String
+            },
+            {
+              name: 'name',
+              notNull: true,
+              dataType: DATA_TYPE.String
+            },
+            {
+              name: 'heroClass',
+              notNull: true,
+              dataType: DATA_TYPE.String
+            },
+            {
+              name: 'skill',
+              notNull: true,
+              dataType: DATA_TYPE.Number
+            },
+            {
+              name: 'focus',
+              notNull: true,
+              dataType: DATA_TYPE.Number
+            },
+            {
+              name: 'hearts',
+              notNull: true,
+              dataType: DATA_TYPE.Number
+            },
+            {
+              name: 'fame',
+              notNull: true,
+              dataType: DATA_TYPE.Number
+            },
+            {
+              name: 'sex',
+              notNull: true,
+              dataType: DATA_TYPE.String
+            },
+            {
+              name: 'potentialSkill',
+              notNull: true,
+              dataType: DATA_TYPE.Number
+            },
         ]
     }
 

@@ -33,15 +33,9 @@ class Raid extends Component {
   }
 
   loadPlayersList = () => {
-    // TODO charger depuis la mémoire locale ou le serveur
-    let list = [];
-    try {
-      const players = this.playerService.getPlayers();
-      console.log(players);
-    } catch (e) {
-      console.error(e);
-    }
+    this.loadPlayersFromSave();
 
+    let list = [];
 
     for (let i = 1; i<= 20; i++) {
       list.push({
@@ -50,6 +44,15 @@ class Raid extends Component {
       });
     }
     return list;
+  }
+
+  async loadPlayersFromSave() {
+    try {
+      const players = await this.playerService.getPlayers();
+      console.log(players);
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   allowDrop(e) {

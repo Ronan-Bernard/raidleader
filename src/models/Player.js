@@ -1,5 +1,6 @@
 export class Player {
   id;
+  hash;
   name;
   heroClass;
   skill;
