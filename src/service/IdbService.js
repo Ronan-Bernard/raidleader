@@ -43,6 +43,11 @@ const getDbSchema = () => {
               dataType: DATA_TYPE.String
             },
             {
+              name: 'position',
+              notNull: true,
+              dataType: DATA_TYPE.Number
+            },
+            {
               name: 'heroClass',
               notNull: true,
               dataType: DATA_TYPE.String

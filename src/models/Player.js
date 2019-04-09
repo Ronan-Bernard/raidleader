@@ -2,6 +2,7 @@ export class Player {
   id;
   hash;
   name;
+  position;
   heroClass;
   skill;
   focus;
@@ -10,7 +11,6 @@ export class Player {
   sex;
   potentialSkill;
   available;
-  hash;
   creationDate;
 
   constructor(props) {
