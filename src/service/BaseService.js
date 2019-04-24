@@ -1,8 +1,5 @@
-import {
-    Column,
-    DATA_TYPE,
-    COL_OPTION
-} from "jsstore";
+// eslint-disable-next-line
+import { Column, DATA_TYPE, COL_OPTION } from "jsstore";
 import {
     idbCon
 } from "./IdbService";

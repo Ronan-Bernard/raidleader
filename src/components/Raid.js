@@ -8,33 +8,38 @@ class Raid extends Component {
   constructor(props) {
     super(props);
       this.playerService = new PlayerService();
+      this.playersHashes = [];
 
-      let initialPlayersList = this.loadPlayersList();
+      let initialPlayersList = this.loadEmptyPlayersList();
       store.dispatch({
         type: 'load_players_list',
         playersList: initialPlayersList
       })
-
-      let allGroups = [];
-      for (var k = 1; k <= 4; k++) {
-        let idBasis = ((k - 1) * 5) + 1;
-        allGroups[k] = [];
-        for (var l = idBasis; l < (idBasis + 5); l++) {
-          allGroups[k].push(initialPlayersList['player' + l]);
-        }
-      }
-
+      let allGroups = this.setGroupPlayersFromPlayersList(initialPlayersList);
       this.state = {
+        playersList: initialPlayersList,
         groupPlayers1: allGroups[1],
         groupPlayers2: allGroups[2],
         groupPlayers3: allGroups[3],
         groupPlayers4: allGroups[4]
       };
+
+      this.loadPlayersFromSave();
   }
 
-  loadPlayersList = () => {
-    this.loadPlayersFromSave();
+  setGroupPlayersFromPlayersList(list) {
+    let allGroups = [];
+    for (var k = 1; k <= 4; k++) {
+      let idBasis = ((k - 1) * 5) + 1;
+      allGroups[k] = [];
+      for (var l = idBasis; l < (idBasis + 5); l++) {
+        allGroups[k].push(list['player' + l]);
+      }
+    }
+    return allGroups;
+  }
 
+  loadEmptyPlayersList() {
     let list = [];
 
     for (let i = 1; i<= 20; i++) {
@@ -47,12 +52,32 @@ class Raid extends Component {
   }
 
   async loadPlayersFromSave() {
+    const list= this.state.playersList;
     try {
       const players = await this.playerService.getPlayers();
-      console.log(players);
+      if (players.length) {
+        this.loadPlayersHashes(players);
+        // todo forEach, loader à sa position dans list
+        players.forEach(function(i) {
+          list[i.position] = Object.assign({}, list[i], {
+            id: 'player' + i.position
+          });
+        });
+        // modifier list, qui sera retourné
+        this.setGroupPlayersFromPlayersList(list);
+      }
     } catch (e) {
       console.error(e);
     }
+  }
+
+  // TODO je pense qu'on peut se passer de ce tableau
+  loadPlayersHashes(players) {
+    let loadedPlayersHashes = [];
+    players.forEach(function(i) {
+      loadedPlayersHashes.push(i.hash);
+    });
+    this.playersHashes = loadedPlayersHashes;
   }
 
   allowDrop(e) {
@@ -60,15 +85,35 @@ class Raid extends Component {
   }
 
   savePlayersList = (playersList) => {
-    if (_.findIndex(playersList, function(i) { return i.sex !== 'z'}) === -1) {
+    if (this.allPlayersArePlaceholder(playersList)) {
       return;
     }
-    console.log('should save');
+    for (let i = 0; i < playersList.length; i++) {
+      let player = playersList[i];
+      if (this.isPlayerANewcomer(player)) {
+        this.playerService.addPlayer(Object.assign({}, player, {
+          position: player.id.substring(6),
+          creationDate: Date.now()
+        }));
+        this.playersHashes.push(player.hash);
+      } else {
+        // comparer player.position et sa position
 
+      }
+
+    }
+  }
+
+  allPlayersArePlaceholder(players) {
+    return (_.findIndex(players, function(i) { return i.sex !== 'z'}) === -1);
+  }
+  isPlayerANewcomer(player) {
+    return (this.playersHashes.indexOf(player.hash) === -1);
   }
 
   render() {
     const {
+      playersList,
       groupPlayers1,
       groupPlayers2,
       groupPlayers3,
